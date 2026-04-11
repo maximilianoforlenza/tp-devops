@@ -1,0 +1,11 @@
+{
+  "name": "tp-devops",
+  "version": "1.0.0",
+  "description": "tp devops - up",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maximiliano Forlenza",
+  "license": "MIT"
+}
