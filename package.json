@@ -2,13 +2,20 @@
   "name": "tp-devops",
   "version": "1.0.0",
   "description": "tp devops - up",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "dev": "node src/index.js",
+    "lint": "standard src/",
+    "fix:lint": "standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "author": "Maximiliano Forlenza",
   "license": "MIT",
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
   }
 }
