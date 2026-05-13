@@ -2,12 +2,12 @@
   "name": "tp-devops",
   "version": "1.0.0",
   "description": "tp devops - up",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "node src/index.js",
-    "lint": "standard src/",
+    "dev": "node index.js",
+    "lint": "standard",
     "fix:lint": "standard --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "type": "module",
   "author": "Maximiliano Forlenza",
@@ -16,6 +16,17 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "standard": "^17.1.2"
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.5",
+    "babel-jest": "^30.4.1",
+    "jest": "^30.4.2",
+    "standard": "^17.1.2",
+    "superagent": "^10.3.0",
+    "supertest": "^7.2.2"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
   }
 }
