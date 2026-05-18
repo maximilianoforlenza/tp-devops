@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tp-devops
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: OTEL_SERVICE_NAME
+        value: tp-devops
+      - key: OTEL_EXPORTER_OTLP_ENDPOINT
+        sync: false
+      - key: OTEL_EXPORTER_OTLP_HEADERS
+        sync: false
+      - key: OTEL_EXPORTER_OTLP_PROTOCOL
+        value: http/protobuf
