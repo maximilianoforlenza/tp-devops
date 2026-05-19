@@ -14,3 +14,5 @@ services:
         sync: false
       - key: OTEL_EXPORTER_OTLP_PROTOCOL
         value: http/protobuf
+      - key: OTEL_NODE_RESOURCE_DETECTORS
+        value: env,host,os
