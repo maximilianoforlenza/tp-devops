@@ -12,3 +12,26 @@ describe('Test the root path', () => {
       })
   })
 })
+
+describe('GET /health', () => {
+  test('should return status ok', done => {
+    request(app)
+      .get('/health')
+      .then(response => {
+        expect(response.statusCode).toBe(200)
+        expect(response.body.status).toBe('ok')
+        done()
+      })
+  })
+})
+
+describe('GET /error', () => {
+  test('should return 500', done => {
+    request(app)
+      .get('/error')
+      .then(response => {
+        expect(response.statusCode).toBe(500)
+        done()
+      })
+  })
+})
