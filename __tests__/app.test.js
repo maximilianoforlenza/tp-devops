@@ -35,3 +35,15 @@ describe('GET /error', () => {
       })
   })
 })
+
+describe('GET /ping', () => {
+  test('should return version', done => {
+    request(app)
+      .get('/ping')
+      .then(response => {
+        expect(response.statusCode).toBe(200)
+        expect(response.body).toHaveProperty('version')
+        done()
+      })
+  })
+})

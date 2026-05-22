@@ -2,7 +2,6 @@ services:
   - type: web
     name: tp-devops
     runtime: docker
-    dockerfilePath: ./Dockerfile
     envVars:
       - key: PORT
         value: 3000
