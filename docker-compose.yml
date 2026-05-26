@@ -5,10 +5,24 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/tp-devops
       - OTEL_SERVICE_NAME=tp-devops
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["node", "--import", "./instrumentation.mjs", "--watch", "index.js"]
     depends_on:
+      - mongo
       - otel-collector
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.105.0
