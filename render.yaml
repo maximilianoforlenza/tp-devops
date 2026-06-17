@@ -1,7 +1,9 @@
 services:
   - type: web
     name: tp-devops
-    runtime: docker
+    runtime: image
+    image:
+      url: docker.io/forlenzamaximiliano/tp-devops:latest
     envVars:
       - key: PORT
         value: 3000
