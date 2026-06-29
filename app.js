@@ -1,4 +1,5 @@
 import express from 'express'
+import User from './src/models/User.js'
 
 process.loadEnvFile()
 
@@ -20,6 +21,15 @@ app.get('/error', (req, res) => {
 
 app.get('/ping', (_req, res) => {
   res.json({ version })
+})
+
+app.get('/users', async (_req, res) => {
+  try {
+    const users = await User.find().lean().exec()
+    res.json(users)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
 export default app
