@@ -10,9 +10,9 @@ const sdk = new NodeSDK({
   }),
   instrumentations: [getNodeAutoInstrumentations({
     '@opentelemetry/instrumentation-http': {
-      requestHook: (span, request) => {
-        if ('route' in request && request.route?.path) {
-          span.updateName(`${request.method} ${request.route.path}`)
+      responseHook: (span, response) => {
+        if ('route' in response && response.route?.path) {
+          span.updateName(`${response.method} ${response.route.path}`)
         }
       }
     }
