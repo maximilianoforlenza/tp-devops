@@ -8,7 +8,15 @@ const sdk = new NodeSDK({
   metricReader: new PeriodicExportingMetricReader({
     exporter: new OTLPMetricExporter()
   }),
-  instrumentations: [getNodeAutoInstrumentations()]
+  instrumentations: [getNodeAutoInstrumentations({
+    '@opentelemetry/instrumentation-http': {
+      requestHook: (span, request) => {
+        if ('route' in request && request.route?.path) {
+          span.updateName(`${request.method} ${request.route.path}`)
+        }
+      }
+    }
+  })]
 })
 
 sdk.start()
