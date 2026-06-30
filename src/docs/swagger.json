@@ -132,6 +132,40 @@
 					}
 				}
 			}
+		},
+		"/login": {
+			"post": {
+				"operationId": "login",
+				"description": "Login",
+				"requestBody": {
+					"description": "login",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {"type": "string"},
+									"password": {"type": "string"}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Login successfull",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
 		}
 	}
 }
