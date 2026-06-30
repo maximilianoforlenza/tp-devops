@@ -1,5 +1,13 @@
 import express from 'express'
+import swaggerUi from 'swagger-ui-express'
+import { readFileSync } from 'fs'
+import path from 'path'
+
 import User from './src/models/User.js'
+
+const swaggerDocument = JSON.parse(
+  readFileSync(path.resolve('./src/docs/swagger.json'))
+)
 
 process.loadEnvFile()
 
@@ -31,5 +39,7 @@ app.get('/users', async (_req, res) => {
     res.status(500).json({ error: error.message })
   }
 })
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }))
 
 export default app
