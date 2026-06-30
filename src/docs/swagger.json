@@ -1,0 +1,137 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "tp-devops",
+		"description": "Trabajo practico devops",
+		"version": "1.0"
+	},
+	"servers": [{"url": "http://localhost:3000"}],
+	"paths": {
+		"/": {
+			"get": {
+				"operationId": "root",
+				"description": "Root",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/ping": {
+			"get": {
+				"operationId": "ping",
+				"description": "Check service version",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"version": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/health": {
+			"get": {
+				"operationId": "health",
+				"description": "Check weather service is working",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"status": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/error": {
+			"get": {
+				"operationId": "error",
+				"description": "Return an error",
+				"responses": {
+					"500": {
+						"description": "Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "get-users",
+				"description": "Get users",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {"type": "string"},
+											"email": {"type": "string"},
+											"role":{"type": "string"},
+											"active":{"type": "boolean"}
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		}
+	}
+}
