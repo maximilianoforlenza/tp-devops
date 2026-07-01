@@ -1,0 +1,208 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "tp-devops",
+		"description": "Trabajo practico devops",
+		"version": "1.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
+	"paths": {
+		"/": {
+			"get": {
+				"operationId": "root",
+				"description": "Root",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/ping": {
+			"get": {
+				"operationId": "ping",
+				"description": "Check service version",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"version": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/health": {
+			"get": {
+				"operationId": "health",
+				"description": "Check weather service is working",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"status": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/error": {
+			"get": {
+				"operationId": "error",
+				"description": "Return an error",
+				"responses": {
+					"500": {
+						"description": "Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"operationId": "get-users",
+				"description": "Get users",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"email": {
+												"type": "string"
+											},
+											"role": {
+												"type": "string"
+											},
+											"active": {
+												"type": "boolean"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/login": {
+			"post": {
+				"operationId": "login",
+				"description": "Login",
+				"requestBody": {
+					"description": "login",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Login successfull",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"token": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		}
+	}
+}

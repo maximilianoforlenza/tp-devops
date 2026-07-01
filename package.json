@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node --import ./instrumentation.mjs --watch index.js",
-    "dev": "node index.js",
+    "dev": "node --watch index.js",
     "lint": "standard",
     "fix:lint": "standard --fix",
-    "test": "jest"
+    "test": "jest --env-file=.env.test"
   },
   "type": "module",
   "author": "Maximiliano Forlenza",
@@ -22,14 +22,18 @@
     "@opentelemetry/sdk-node": "^0.218.0",
     "@opentelemetry/sdk-trace-node": "^2.7.1",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.2.0",
-    "mongoose": "^9.6.2"
+    "mongoose": "^9.6.2",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.5",
     "babel-jest": "^30.4.1",
     "jest": "^30.4.2",
+    "mongodb-memory-server": "^11.2.0",
     "standard": "^17.1.2",
     "superagent": "^10.3.0",
     "supertest": "^7.2.2"
