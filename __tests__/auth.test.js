@@ -46,6 +46,7 @@ describe('POST /login', () => {
       .send({ username: credentials.username, password: credentials.password })
 
     expect(response.statusCode).toBe(200)
+    expect(response.token).not.toBeNull()
   })
 
   test('should return 401 when password is invalid', async () => {

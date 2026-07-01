@@ -3,7 +3,7 @@ import request from 'supertest'
 import app from '../app.js'
 
 describe('Test the root path', () => {
-  test('It should response the GET method', done => {
+  test('should response the GET method', done => {
     request(app)
       .get('/')
       .then(response => {

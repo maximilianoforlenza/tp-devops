@@ -5,7 +5,20 @@
 		"description": "Trabajo practico devops",
 		"version": "1.0"
 	},
-	"servers": [{"url": "http://localhost:3000"}],
+	"servers": [
+		{
+			"url": "http://localhost:3000"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
 	"paths": {
 		"/": {
 			"get": {
@@ -105,6 +118,11 @@
 		},
 		"/users": {
 			"get": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
 				"operationId": "get-users",
 				"description": "Get users",
 				"responses": {
@@ -117,10 +135,18 @@
 									"items": {
 										"type": "object",
 										"properties": {
-											"name": {"type": "string"},
-											"email": {"type": "string"},
-											"role":{"type": "string"},
-											"active":{"type": "boolean"}
+											"name": {
+												"type": "string"
+											},
+											"email": {
+												"type": "string"
+											},
+											"role": {
+												"type": "string"
+											},
+											"active": {
+												"type": "boolean"
+											}
 										}
 									}
 								}
@@ -145,8 +171,12 @@
 							"schema": {
 								"type": "object",
 								"properties": {
-									"username": {"type": "string"},
-									"password": {"type": "string"}
+									"username": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									}
 								}
 							}
 						}
@@ -157,7 +187,14 @@
 						"description": "Login successfull",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"type": "object",
+									"properties": {
+										"token": {
+											"type": "string"
+										}
+									}
+								}
 							}
 						}
 					},
