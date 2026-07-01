@@ -1,7 +1,11 @@
 import app from './app.js'
 import connectDB from './src/helpers/database.js'
 
-process.loadEnvFile()
+try {
+  process.loadEnvFile()
+} catch {
+  console.log('.env is not provided')
+}
 
 const { PORT } = process.env
 
