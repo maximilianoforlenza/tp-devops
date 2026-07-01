@@ -3,6 +3,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 
 process.env.MONGOMS_VERSION = '7.0.14'
 process.env.APP_VERSION = '1.0.1'
+process.env.SECRET = 'secret'
 
 let mongoServer
 
