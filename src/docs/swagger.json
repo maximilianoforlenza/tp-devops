@@ -20,6 +20,31 @@
 				"scheme": "bearer",
 				"bearerFormat": "JWT"
 			}
+		},
+		"responses": {
+			"Error": {
+				"description": "Failed",
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"message": {
+									"type": "string"
+								},
+								"error": {
+									"type": "object",
+									"properties": {
+										"status": {
+											"type": "integer"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"paths": {
@@ -102,19 +127,7 @@
 				"description": "Return an error",
 				"responses": {
 					"500": {
-						"description": "Failed",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object",
-									"properties": {
-										"error": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						}
+						"$ref": "#/components/responses/Error"
 					}
 				}
 			}
@@ -134,27 +147,96 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "array",
-									"items": {
-										"type": "object",
-										"properties": {
-											"name": {
-												"type": "string"
-											},
-											"email": {
-												"type": "string"
-											},
-											"role": {
-												"type": "string"
-											},
-											"active": {
-												"type": "boolean"
+									"type": "object",
+									"properties": {
+										"users": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"type": "string"
+													},
+													"email": {
+														"type": "string"
+													},
+													"role": {
+														"type": "string"
+													},
+													"active": {
+														"type": "boolean"
+													}
+												}
 											}
 										}
 									}
 								}
 							}
 						}
+					},
+					"5XX": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"operationId": "get-user",
+				"description": "Get user by id",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "user id",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"minLength": 24,
+							"maxLength": 24
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"user": {
+											"type": "object",
+											"properties": {
+												"name": {
+													"type": "string"
+												},
+												"email": {
+													"type": "string"
+												},
+												"role": {
+													"type": "string"
+												},
+												"active": {
+													"type": "boolean"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"$ref": "#/components/responses/Error"
+					},
+					"404": {
+						"$ref": "#/components/responses/Error"
 					},
 					"5XX": {
 						"description": "Unexpected error"
@@ -201,8 +283,14 @@
 							}
 						}
 					},
-					"5XX": {
-						"description": "Unexpected error"
+					"401": {
+						"$ref": "#/components/responses/Error"
+					},
+					"422": {
+						"$ref": "#/components/responses/Error"
+					},
+					"500": {
+						"$ref": "#/components/responses/Error"
 					}
 				}
 			}
