@@ -13,4 +13,8 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Trigger Render deploy
-        run: curl -fsSL "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+        env:
+          TAG: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          VERSION="${TAG#v}"
+          curl -fsSL "${{ secrets.RENDER_DEPLOY_HOOK_URL }}&imgURL=docker.io/${{ secrets.DOCKER_IMAGE_NAME }}:${VERSION}"
